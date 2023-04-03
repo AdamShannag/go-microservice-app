@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+  broker-service:
+    build:
+      context: ./../broker-service
+      dockerfile: ./../broker-service/broker-service.dockerfile
+    restart: always
+    ports:
+      - "8080:80"
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  user-service:
+    build:
+      context: ./../user-service
+      dockerfile: ./../user-service/user-service.dockerfile
+    restart: always
+    ports:
+      - "8081:80"
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      DSN: "oracle://dbuser:dbpassword@oracle:1521/XE"
+
+  oracle:
+    image: gvenzl/oracle-xe:21-slim
+    environment:
+      - ORACLE_PASSWORD=dbpassword
+      - ORACLE_CHARACTERSET=AL32UTF8
+    ports:
+      - "1521:1521"
+    volumes:
+      - ./oracle-init:/docker-entrypoint-initdb.d/
+    command: ["--init"]
