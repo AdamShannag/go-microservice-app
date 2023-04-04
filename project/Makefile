@@ -4,7 +4,7 @@ USER_BINARY=userApp
 ## up: starts all containers in the background without forcing build
 up:
 	@echo "Starting Docker images..."
-	docker-compose up -d
+	docker-compose up
 	@echo "Docker images started!"
 
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose
@@ -12,7 +12,7 @@ up_build: build_broker build_user
 	@echo "Stopping docker images (if running...)"
 	sudo docker-compose down
 	@echo "Building (when required) and starting docker images..."
-	sudo docker-compose up --build -d
+	sudo docker-compose up --build
 	@echo "Docker images built and started!"
 
 ## down: stop docker compose

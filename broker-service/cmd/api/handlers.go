@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
+	"net/rpc"
 	"net/url"
 
 	toolkit "github.com/AdamShannag/toolkit/v2"
@@ -42,6 +44,8 @@ func (app *Config) HandleSubmission(w http.ResponseWriter, r *http.Request) {
 	switch requestPayload.Action {
 	case "user":
 		app.userRequest(w, requestPayload.User, r.URL.Query(), r.Method)
+	case "user-rpc":
+		app.insertUserViaRPC(w, requestPayload.User)
 	default:
 		app.tools.ErrorJSON(w, errors.New("unknown action"))
 	}
@@ -93,4 +97,29 @@ func (app *Config) userRequest(w http.ResponseWriter, user UserPayload, params u
 	}
 
 	app.tools.WriteJSON(w, http.StatusOK, jsonFromService)
+}
+
+func (app *Config) insertUserViaRPC(w http.ResponseWriter, u UserPayload) {
+	client, err := rpc.Dial("tcp", "user-service:5001")
+	if err != nil {
+		log.Panicln(err)
+		app.tools.ErrorJSON(w, err)
+		return
+	}
+
+	var result string
+
+	err = client.Call(RPC_CREATE_USER, u, &result)
+	if err != nil {
+		log.Println(err)
+		app.tools.ErrorJSON(w, err)
+		return
+	}
+
+	payload := toolkit.JSONResponse{
+		Error:   false,
+		Message: result,
+	}
+
+	app.tools.WriteJSON(w, http.StatusAccepted, payload)
 }
