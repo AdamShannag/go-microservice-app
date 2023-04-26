@@ -29,7 +29,7 @@ services:
   auth-service:
     build:
       context: ./../auth-service
-      dockerfile: ../auth-service/Dockerfile.dockerfile
+      dockerfile: ../auth-service/auth-service.dockerfile
     restart: always
     ports:
       - "8082:80"

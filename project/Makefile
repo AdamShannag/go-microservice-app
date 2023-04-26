@@ -1,5 +1,6 @@
 BROKER_BINARY=brokerApp
 USER_BINARY=userApp
+AUTH_BINARY=authApp
 
 ## up: starts all containers in the background without forcing build
 up:
@@ -8,7 +9,7 @@ up:
 	@echo "Docker images started!"
 
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose
-up_build: build_broker build_user
+up_build: build_broker build_user build_auth
 	@echo "Stopping docker images (if running...)"
 	sudo docker-compose down
 	@echo "Building (when required) and starting docker images..."
@@ -31,4 +32,10 @@ build_broker:
 build_user:
 	@echo "Building user binary..."
 	cd ../user-service && env GOOS=linux CGO_ENABLED=0 go build -o ${USER_BINARY} ./cmd/api
+	@echo "Done!"
+
+## build_auth: builds the auth binary as a linux executable
+build_auth:
+	@echo "Building auth binary..."
+	cd ../auth-service && env GOOS=linux CGO_ENABLED=0 go build -o ${AUTH_BINARY} ./cmd/api
 	@echo "Done!"
