@@ -137,6 +137,7 @@ fabric.properties
 !LICENSE
 
 !Makefile
+!Dockrfile
 
 # ...even if they are in subdirectories
 !*/
@@ -147,3 +148,4 @@ fabric.properties
 /**/bin/
 /auth-service/bin/authApp
 /**/userstest/
+!/**/**/Dockerfile
