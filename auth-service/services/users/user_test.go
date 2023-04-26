@@ -63,6 +63,7 @@ func TestUser_Validate(t *testing.T) {
 func TestUser_MarshalJSON(t *testing.T) {
 	var (
 		user = User{
+			ID:        "uuid",
 			FirstName: "mohammad",
 			LastName:  "Shnq",
 			Email:     "adam@shnq.com",
@@ -75,14 +76,14 @@ func TestUser_MarshalJSON(t *testing.T) {
 	assert.JSONEq(t, `{
 				"created_at":"0001-01-01T00:00:00Z", 
 				"email":"adam@shnq.com", "first_name":"mohammad", 
-				"id":"00000000-0000-0000-0000-000000000000", 
+				"id":"uuid", 
 				"last_name":"Shnq", 
 				"password":"", 
 				"phone":"0798099158", 
 				"refresh_token":"", 
 				"token":"", 
 				"updated_at":"0001-01-01T00:00:00Z", 
-				"url":"http://localhost:3000/00000000-0000-0000-0000-000000000000", 
+				"url":"http://localhost:3000/uuid", 
 				"user_type":""
 			}`, string(encoded))
 }

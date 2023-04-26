@@ -16,7 +16,7 @@ func TestUpdate_Update(t *testing.T) {
 		service    = New(repository)
 		id         = uuid.New()
 		user       = User{
-			ID:        id,
+			ID:        id.String(),
 			FirstName: "mohammad",
 			LastName:  "Shnq",
 			Email:     "adam@shnq.com",
@@ -27,7 +27,7 @@ func TestUpdate_Update(t *testing.T) {
 
 	user.FirstName = "Adam"
 
-	repository.ExpectUpdate(changes).ForType("user.User")
+	repository.ExpectUpdate(changes).ForType("users.User")
 
 	assert.Nil(t, service.Update(ctx, &user, changes))
 	assert.NotEmpty(t, user.ID)
@@ -42,7 +42,7 @@ func TestUpdate_validateError(t *testing.T) {
 		service    = New(repository)
 		id         = uuid.New()
 		user       = User{
-			ID:       id,
+			ID:       id.String(),
 			LastName: "Shnq",
 			Email:    "adam@shnq.com",
 			Phone:    "0798099158",

@@ -17,7 +17,7 @@ func TestGet_Get(t *testing.T) {
 		user       User
 		id         = uuid.New()
 		result     = User{
-			ID:        id,
+			ID:        id.String(),
 			FirstName: "mohammad",
 			LastName:  "Shnq",
 			Email:     "adam@shnq.com",

@@ -144,5 +144,6 @@ fabric.properties
 /**/__OLD/
 /**/brokerApp
 /**/userApp
-/**/authApp
+/**/bin/
+/auth-service/bin/authApp
 /**/userstest/

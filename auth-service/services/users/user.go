@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/google/uuid"
 	"os"
 	"time"
 )
@@ -24,7 +23,7 @@ var (
 
 // User represent a record stored in todos table.
 type User struct {
-	ID           uuid.UUID `json:"id"`
+	ID           string    `json:"id"`
 	FirstName    string    `json:"first_name" validate:"required, min=2, max=100"`
 	LastName     string    `json:"last_name" validate:"required, min=2, max=100"`
 	Password     string    `json:"password" validate:"required, min=6"`

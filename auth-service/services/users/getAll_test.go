@@ -18,7 +18,7 @@ func TestGetAll_GetAll(t *testing.T) {
 		filter     = Filter{"mo"}
 		result     = []User{
 			{
-				ID:        uuid.New(),
+				ID:        uuid.New().String(),
 				FirstName: "mohammad",
 				LastName:  "Shnq",
 				Email:     "adam@shnq.com",

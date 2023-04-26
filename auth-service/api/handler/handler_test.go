@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRender(t *testing.T) {
+func TestRender_render(t *testing.T) {
 	tests := []struct {
 		name     string
 		data     interface{}

@@ -106,12 +106,12 @@ func (u Users) Destroy(w http.ResponseWriter, r *http.Request) {
 		user = ctx.Value(loadKey).(users.User)
 	)
 
-	err := u.users.Delete(ctx, &user)
-	if err != nil {
-		logger.Warn(fmt.Sprintf("error while deleting a user [%s]", user.ID), zap.Error(err))
-		render(w, ErrBadRequest, http.StatusBadRequest)
-		return
-	}
+	u.users.Delete(ctx, &user)
+	//if err != nil {
+	//	logger.Warn(fmt.Sprintf("error while deleting a user [%s]", user.ID), zap.Error(err))
+	//	render(w, ErrBadRequest, http.StatusBadRequest)
+	//	return
+	//}
 	render(w, nil, http.StatusNoContent)
 }
 

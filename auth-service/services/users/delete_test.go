@@ -14,7 +14,7 @@ func TestDelete_Delete(t *testing.T) {
 		repository = reltest.New()
 		service    = New(repository)
 		user       = User{
-			ID:        uuid.New(),
+			ID:        uuid.New().String(),
 			FirstName: "Mohammad",
 			LastName:  "Shnq",
 			Email:     "adam@shnq.com",
@@ -22,7 +22,7 @@ func TestDelete_Delete(t *testing.T) {
 		}
 	)
 
-	repository.ExpectDelete().ForType("user.User")
+	repository.ExpectDelete().ForType("users.User")
 
 	assert.NotPanics(t, func() {
 		service.Delete(ctx, &user)

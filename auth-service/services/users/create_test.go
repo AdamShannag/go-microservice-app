@@ -14,7 +14,7 @@ func TestCreate_Create(t *testing.T) {
 		repository = reltest.New()
 		service    = New(repository)
 		user       = User{
-			ID:        uuid.New(),
+			ID:        uuid.New().String(),
 			FirstName: "Mohammad",
 			LastName:  "Shnq",
 			Email:     "adam@shnq.com",
@@ -34,7 +34,7 @@ func TestCreate_validateError(t *testing.T) {
 		repository = reltest.New()
 		service    = New(repository)
 		user       = User{
-			ID:       uuid.New(),
+			ID:       uuid.New().String(),
 			LastName: "Shnq",
 			Email:    "adam@shnq.com",
 			Phone:    "0798099158",

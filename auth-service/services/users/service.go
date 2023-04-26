@@ -19,7 +19,7 @@ type Service interface {
 	GetAll(ctx context.Context, users *[]User, filter Filter) error
 	Create(ctx context.Context, user *User) error
 	Update(ctx context.Context, user *User, changes rel.Changeset) error
-	Delete(ctx context.Context, user *User) error
+	Delete(ctx context.Context, user *User)
 }
 
 // beside embeding the struct, you can also declare the function directly on this struct.
