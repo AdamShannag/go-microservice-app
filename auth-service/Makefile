@@ -6,7 +6,7 @@ db-rollback:
 gen:
 	go generate ./...
 build: gen
-	go build -mod=vendor -o bin/api ./cmd/api
+	go build -o authApp ./cmd/api
 test: gen
 	go test -mod=vendor -race ./...
 start:
@@ -15,11 +15,3 @@ docker:
 	docker build -t $(DOCKER_REGISTRY)/$(DEPLOY):$(RELEASE_VERSION) -f ./deploy/$(DEPLOY)/Dockerfile .
 push:
 	docker push $(DOCKER_REGISTRY)/$(DEPLOY):$(RELEASE_VERSION)
-
-build-bin:
-	go build -o bin/micro
-
-run: build-bin
-	./bin/micro
-
-.PHONY: run build-bin
