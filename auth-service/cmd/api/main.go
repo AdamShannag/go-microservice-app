@@ -6,6 +6,7 @@ import (
 	"github.com/go-rel/postgres"
 	"github.com/go-rel/rel"
 	"go.uber.org/zap"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -27,7 +28,7 @@ func main() {
 
 	var (
 		ctx        = context.Background()
-		repository = initRepository()
+		repository = initRepository(ctx)
 		mux        = api.NewMux(repository)
 		server     = http.Server{
 			Addr:    ":" + port,
@@ -46,7 +47,7 @@ func main() {
 	<-shutdown
 }
 
-func initRepository() rel.Repository {
+func initRepository(ctx context.Context) rel.Repository {
 	var (
 		logger, _ = zap.NewProduction(zap.Fields(zap.String("type", "repository")))
 		dsn       = os.Getenv("DSN")
@@ -54,7 +55,12 @@ func initRepository() rel.Repository {
 
 	adapter, err := postgres.Open(dsn)
 	if err != nil {
+		log.Panic(err)
 		logger.Fatal(err.Error(), zap.Error(err))
+	}
+	err = adapter.Ping(ctx)
+	if err != nil {
+		log.Panic(err)
 	}
 	// add to graceful shutdown list.
 	shutdowns = append(shutdowns, adapter.Close)

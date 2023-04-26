@@ -37,7 +37,7 @@ services:
       mode: replicated
       replicas: 1
     environment:
-      DSN: "postgresql://localhost:5432/users"
+      DSN: "host=postgres port=5432 user=postgres password=postgres dbname=users sslmode=disable timezone=UTC connect_timeout=5"
 
   oracle:
     image: gvenzl/oracle-xe:21-slim
