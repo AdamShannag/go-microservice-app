@@ -55,11 +55,12 @@ func initRepository(ctx context.Context) rel.Repository {
 
 	adapter, err := postgres.Open(dsn)
 	if err != nil {
-		log.Panic(err)
 		logger.Fatal(err.Error(), zap.Error(err))
+		log.Panic(err)
 	}
 	err = adapter.Ping(ctx)
 	if err != nil {
+		logger.Fatal(err.Error(), zap.Error(err))
 		log.Panic(err)
 	}
 	// add to graceful shutdown list.

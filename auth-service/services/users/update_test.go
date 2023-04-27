@@ -27,7 +27,7 @@ func TestUpdate_Update(t *testing.T) {
 
 	user.FirstName = "Adam"
 
-	repository.ExpectUpdate(changes).ForType("user.User")
+	repository.ExpectUpdate(changes).ForType("users.User")
 
 	assert.Nil(t, service.Update(ctx, &user, changes))
 	assert.NotEmpty(t, user.ID)

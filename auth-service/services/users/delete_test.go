@@ -22,7 +22,7 @@ func TestDelete_Delete(t *testing.T) {
 		}
 	)
 
-	repository.ExpectDelete().ForType("user.User")
+	repository.ExpectDelete().ForType("users.User")
 
 	assert.NotPanics(t, func() {
 		service.Delete(ctx, &user)
