@@ -142,7 +142,8 @@ fabric.properties
 !*/
 
 /**/__OLD/
-/**/brokerApp
-/**/userApp
-/**/authApp
-/**/userstest/
+/auth-service/deploy/bin
+/**/**test/
+/**/.env
+!/auth-service/deploy/image/Dockerfile
+!/**/.env.sample
